@@ -1,7 +1,3 @@
-Here's your complete **GitHub README** in Markdown format, with enhanced formatting and emojis for a polished look:  
-
----
-
 # 🚀 API Gateway Template with NestJS
 
 This project is a **robust, scalable, and configurable API Gateway** built with [NestJS](https://nestjs.com/) and [TypeScript](https://www.typescriptlang.org/). It's designed as a **template** for modern microservices architectures.  
