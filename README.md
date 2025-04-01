@@ -2,7 +2,7 @@ Here's your complete **GitHub README** in Markdown format, with enhanced formatt
 
 ---
 
-# 🚀 API Gateway Template with NestJS  
+# 🚀 API Gateway Template with NestJS
 
 This project is a **robust, scalable, and configurable API Gateway** built with [NestJS](https://nestjs.com/) and [TypeScript](https://www.typescriptlang.org/). It's designed as a **template** for modern microservices architectures.  
 
@@ -75,6 +75,8 @@ yarn install
 
 ```sh
 PORT=3000
+JWT_SECRET=your-jwt-secret-here
+JWT_ALGORITHM=your-jwt-algorithm
 ```
 
 ### 4️⃣ Run in development mode  
@@ -146,6 +148,55 @@ curl http://localhost:3000/users
 ```
 
 The gateway will forward the request and return the **standardized response**.
+
+---
+
+## 🔐 Using JWT Authentication
+
+This API Gateway supports JWT authentication in a provider-agnostic way, meaning you can use Supabase, Auth0, Firebase, or your own auth microservice.
+
+## ⚙️ Configuration
+Add the following to your .env:
+
+```sh
+PORT=3000
+JWT_SECRET=your-jwt-secret-here # e.g. from Supabase > Auth > JWT Settings
+JWT_ALGORITHM=your-jwt-algorithm
+```
+
+## 📦 Route Example with Authentication
+
+```json
+{
+  "upstreamPath": "/FinancialSuite/{everything}",
+  "downstreamHost": "localhost",
+  "downstreamPort": 3001,
+  "downstreamPath": "/FinancialSuite/{everything}",
+  "methods": ["GET", "POST"],
+  "auth": true
+}
+```
+---
+
+## 🪪 Sending the Token in Your Request
+```http
+Authorization: Bearer eyJhbGciOi...
+```
+
+## 🔁 How It Works
+If auth: true, the API Gateway validates the token using your JWT_SECRET.
+The decoded payload is attached to req.user for downstream services.
+If the token is invalid or missing, the request is rejected with 401 Unauthorized.
+
+
+---
+## 📝 Logging
+Each request is logged with:
+
+Request ID (x-request-id)
+Method, path, status, duration
+IP, headers, and request body (if applicable)
+Logs are saved locally using LoggerHelper.writeLog() and also printed in JSON format to the console.
 
 ---
 
